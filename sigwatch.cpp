@@ -29,10 +29,14 @@
 #include "sigwatch.h"
 #include <memory>
 
-#define HAS_UNIX_SIGNALS (!Q_OS_WIN)
+#ifdef Q_OS_WIN
+#define HAS_UNIX_SIGNALS 0
+#else
+#define HAS_UNIX_SIGNALS 1
+#endif
 
 #if HAS_UNIX_SIGNALS
-# include <signal.h>
+# include <csignal>
 # include <sys/socket.h>
 # include <unistd.h>
 # include <cerrno>
@@ -51,7 +55,7 @@ class UnixSignalWatcherPrivate : public QObject
 
 public:
     UnixSignalWatcherPrivate(UnixSignalWatcher *q);
-    ~UnixSignalWatcherPrivate();
+    ~UnixSignalWatcherPrivate() override;
 
     void watchForSignal(int signal);
     static void signalHandler(int signal);
