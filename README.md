@@ -3,7 +3,7 @@ Unix Signal Watcher For Qt
 
 Licence: [MIT](http://opensource.org/licenses/MIT)  
 
-This is a fork https://github.com/sijk/qt-unix-signals, which seems unmaintained
+This is a fork of https://github.com/sijk/qt-unix-signals, which seems unmaintained
 now. It collects various patches and improvements from other forks and updates
 the code to a more modern cmake/c++/Qt style.
 
