@@ -30,6 +30,10 @@
 
 class UnixSignalWatcherPrivate;
 
+#if Q_OS_WIN
+const int SIGINT = 2;
+const int SIGTERM = 15;
+#endif
 
 /*!
  * \brief The UnixSignalWatcher class converts Unix signals to Qt signals.
