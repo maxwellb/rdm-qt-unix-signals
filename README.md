@@ -1,9 +1,11 @@
 Unix Signal Watcher For Qt
 ==========================
 
-Author: Simon Knopp  
 Licence: [MIT](http://opensource.org/licenses/MIT)  
 
+This is a fork https://github.com/sijk/qt-unix-signals, which seems unmaintained
+now. It collects various patches and improvements from other forks and updates
+the code to a more modern cmake/c++/Qt style.
 
 ## Summary
 
@@ -21,7 +23,7 @@ class.
 ## Interface
 
 The interface is simple: you call `watchForSignal()` with the signals you're
-interested in, and `connect()` your handlers to `SIGNAL(unixSignal(int))`.
+interested in, and `connect()` your handlers to `&UnixSignalWatcher::unixSignal`.
 
 ``` c++
 class UnixSignalWatcher : public QObject
@@ -55,7 +57,7 @@ int main(int argc, char *argv[])
     UnixSignalWatcher sigwatch;
     sigwatch.watchForSignal(SIGINT);
     sigwatch.watchForSignal(SIGTERM);
-    QObject::connect(&sigwatch, SIGNAL(unixSignal(int)), &app, SLOT(quit()));
+    QObject::connect(&sigwatch, &UnixSignalWatcher::unixSignal, &app, &QCoreApplication::quit);
 
     int exitcode = app.exec();
     qDebug() << "Goodbye";
@@ -94,5 +96,5 @@ farewell message. For instance:
 
 ## Compatibility
 
-Tested with Qt 4.6 and 5.2 on Linux.
+Tested with Qt 5.11 on Linux.
 
