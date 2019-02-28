@@ -7,7 +7,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 SET(QTSignal_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE INTERNAL "QTSignal Include Dir")
 
-find_package(Qt5Widgets)
 find_package(Qt5Core)
 SET(GCC_COMPILE_FLAGS "-fPIC -std=c++11 -pg")
 
@@ -21,10 +20,10 @@ set(CMAKE_AUTOMOC ON)
 
 
 include_directories(
-	${Qt5Widgets_INCLUDE_DIRS})
+  ${Qt5Core_INCLUDE_DIRS})
 add_library(QTSignal SHARED
 		sigwatch.cpp
 		)
 target_link_libraries (QTSignal
-		${Qt5Widgets_LIBRARIES}
+    ${Qt5Core_LIBRARIES}
 )
